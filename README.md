@@ -133,6 +133,10 @@ bootstrap();
 ---
 
 >## OUTPUT
+>#### project run korle
+<img width="812" height="413" alt="image" src="https://github.com/user-attachments/assets/ec770cd8-d33c-4824-9b85-6a43b71d5ccb" />
+
+>#### Post method er output
 <img width="1305" height="408" alt="image" src="https://github.com/user-attachments/assets/1f50d13b-cb8f-4664-a9b0-22753e5e943c" />
 
 ---
