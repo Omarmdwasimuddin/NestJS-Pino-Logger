@@ -9,18 +9,19 @@ npm install nestjs-pino pino-http pino-pretty
 #### `app.module.ts`
 ```bash
 import { LoggerModule } from 'nestjs-pino';
+import { randomUUID } from 'crypto';
 
 @Module({
   imports: [
     LoggerModule.forRoot({
       pinoHttp: {
         genReqId: (req, res) => {
-        const existingId = req.headers['x-request-id'];
-        if(existingId) return existingId;
-        const id = crypto.randomUUID();
-        res.setHeader('x-request-id', id);
-        return id;
-      },
+          const existingId = req.headers['x-request-id'];
+          if (existingId) return Array.isArray(existingId) ? existingId[0] : existingId;
+          const id = randomUUID();
+          res.setHeader('x-request-id', id);
+          return id;
+        },
         level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
         transport: process.env.NODE_ENV !== 'production' 
           ? { target: 'pino-pretty' } 
