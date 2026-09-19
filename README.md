@@ -93,3 +93,45 @@ export class StudentController {
 }
 ```
 ---
+
+#### `app.module.ts`
+```bash
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { StudentModule } from './student/student.module';
+import { LoggerModule } from 'nestjs-pino';
+
+@Module({
+  imports: [ LoggerModule.forRoot({
+    pinoHttp: {
+      level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+      transport: process.env.NODE_ENV !== 'production' ? { target: 'pino-pretty' } : undefined,
+      redact: ['req.headers.authorization', 'req.headers.cookie'],
+    },
+  }), StudentModule],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+```
+---
+
+#### `main.ts`
+```bash
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { Logger } from 'nestjs-pino';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useLogger(app.get(Logger))
+  await app.listen(process.env.PORT ?? 3000);
+}
+bootstrap();
+```
+---
+
+>## OUTPUT
+
+---
