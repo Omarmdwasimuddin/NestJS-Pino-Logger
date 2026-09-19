@@ -14,6 +14,13 @@ import { LoggerModule } from 'nestjs-pino';
   imports: [
     LoggerModule.forRoot({
       pinoHttp: {
+        genReqId: (req, res) => {
+        const existingId = req.headers['x-request-id'];
+        if(existingId) return existingId;
+        const id = crypto.randomUUID();
+        res.setHeader('x-request-id', id);
+        return id;
+      },
         level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
         transport: process.env.NODE_ENV !== 'production' 
           ? { target: 'pino-pretty' } 
@@ -117,6 +124,13 @@ import { LoggerModule } from 'nestjs-pino';
 @Module({
   imports: [ LoggerModule.forRoot({
     pinoHttp: {
+      genReqId: (req, res) => {
+        const existingId = req.headers['x-request-id'];
+        if(existingId) return existingId;
+        const id = crypto.randomUUID();
+        res.setHeader('x-request-id', id);
+        return id;
+      },
       level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
       transport: process.env.NODE_ENV !== 'production' ? { target: 'pino-pretty' } : undefined,
       redact: ['req.headers.authorization', 'req.headers.cookie'],
@@ -126,6 +140,7 @@ import { LoggerModule } from 'nestjs-pino';
   providers: [AppService],
 })
 export class AppModule {}
+
 ```
 ---
 
