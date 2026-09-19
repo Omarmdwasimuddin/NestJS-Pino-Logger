@@ -139,4 +139,11 @@ bootstrap();
 >#### Post method er output
 <img width="1305" height="408" alt="image" src="https://github.com/user-attachments/assets/1f50d13b-cb8f-4664-a9b0-22753e5e943c" />
 
+<img width="1328" height="594" alt="image" src="https://github.com/user-attachments/assets/7952eede-089b-4ba5-bd1f-b446ff0228a7" />
+
+>#### Get method er output
+<img width="404" height="489" alt="image" src="https://github.com/user-attachments/assets/931ffd11-9ec0-4240-b5be-0cf6cc132000" />
+
+<img width="437" height="550" alt="image" src="https://github.com/user-attachments/assets/8981709d-d538-4059-8ad5-9150d97d71e4" />
+
 ---
