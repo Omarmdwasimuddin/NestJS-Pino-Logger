@@ -4,6 +4,9 @@
 ```bash
 npm install nestjs-pino pino-http
 ```
+```bash
+npm install pino-pretty
+```
 ---
 
 #### `app.module.ts`
