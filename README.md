@@ -5,3 +5,24 @@
 npm install nestjs-pino pino-http
 ```
 ---
+
+#### `app.module.ts`
+```bash
+import { LoggerModule } from 'nestjs-pino';
+
+@Module({
+  imports: [
+    LoggerModule.forRoot({
+      pinoHttp: {
+        level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+        transport: process.env.NODE_ENV !== 'production' 
+          ? { target: 'pino-pretty' } 
+          : undefined,
+        redact: ['req.headers.authorization', 'req.headers.cookie'],
+      },
+    }),
+  ],
+})
+export class AppModule {}
+```
+---
