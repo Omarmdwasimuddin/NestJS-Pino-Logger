@@ -26,3 +26,9 @@ import { LoggerModule } from 'nestjs-pino';
 export class AppModule {}
 ```
 ---
+
+#### `main.ts`
+```bash
+app.useLogger(app.get(Logger));
+```
+---
