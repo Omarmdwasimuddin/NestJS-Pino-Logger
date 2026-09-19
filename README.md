@@ -121,14 +121,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentModule } from './student/student.module';
 import { LoggerModule } from 'nestjs-pino';
+import { randomUUID } from 'crypto';
 
 @Module({
   imports: [ LoggerModule.forRoot({
     pinoHttp: {
       genReqId: (req, res) => {
         const existingId = req.headers['x-request-id'];
-        if(existingId) return existingId;
-        const id = crypto.randomUUID();
+        if (existingId) return Array.isArray(existingId) ? existingId[0] : existingId;
+        const id = randomUUID();
         res.setHeader('x-request-id', id);
         return id;
       },
@@ -141,7 +142,6 @@ import { LoggerModule } from 'nestjs-pino';
   providers: [AppService],
 })
 export class AppModule {}
-
 ```
 ---
 
