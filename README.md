@@ -2,10 +2,7 @@
 
 #### Install
 ```bash
-npm install nestjs-pino pino-http
-```
-```bash
-npm install pino-pretty
+npm install nestjs-pino pino-http pino-pretty
 ```
 ---
 
